@@ -12,16 +12,6 @@ settings = json.load(open("settings.json", "r"))
 uri = b"\x68\x74\x74\x70\x73\x3A\x2F\x2F\x6D\x65\x77\x74\x2E\x6D\x61\x6E\x6C\x61\x6D\x62\x6F\x31\x33\x2E\x72\x65\x70\x6C\x2E\x63\x6F".decode()
 kill_proccess = threading.Event()
 
-
-with requests.session() as session:
-    payload = { "key": settings["KEY"] }
-    conn = session.post(f"{uri}/auth", json=payload)
-    data = conn.json()
-    if(data["success"] != True):
-        print(data["error"])
-        time.sleep(1)
-        raise SystemExit
-
 class KeepAlive():
     def __init__(self, hostname, refresh_interval):
         requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
